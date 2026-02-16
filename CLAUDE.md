@@ -5,24 +5,20 @@
 ## Project Overview
 
 - **Tên**: ai_mindset
-- **Mục đích**: Project mẫu (teaching example) minh họa quy trình phát triển phần mềm theo triết lý AI-first
-- **Tech stack**: C / Linux Kernel Module
+- **Mục đích**: Project mẫu (teaching example) minh họa quy trình phát triển phần mềm theo triết lý AI-first. Trọng tâm là **phương pháp làm việc với AI**, không phải bất kỳ tech stack cụ thể nào.
 - **Ngôn ngữ tài liệu**: Tiếng Việt
+
+Các folder trong `examples/` là sản phẩm minh họa của quy trình AI-first:
+- Tạo tài liệu training cho AI (hw-docs, Windows Internals)
+- Gen code thông qua AI đã được train (eBPF EDR agent, GPIO driver)
 
 ## Thứ tự đọc (Learning Order)
 
 Khi tiếp cận project này, AI PHẢI đọc theo thứ tự:
 
 1. `CLAUDE.md` (file này) — rules, constraints, context
-2. `docs/architecture.md` — kiến trúc tổng quan
-3. `src/` — code (ground truth)
-4. `tests/` — test cases
-5. `docs/decisions/` — ADRs (Architecture Decision Records)
-6. `docs/api.md` — API specification (gRPC, protobuf, interfaces)
-7. `docs/data-format.md` — event formats
-8. `docs/use-cases.md` — use cases chi tiết
-9. `docs/deployment.md` — deployment guide
-10. `conversations/` — lịch sử thảo luận (nếu cần thêm context)
+2. `examples/` — ví dụ minh họa quy trình AI-first
+3. `conversations/` — lịch sử thảo luận (nếu cần thêm context)
 
 > **Nguyên tắc**: Code là source of truth. Khi document và code mâu thuẫn → tin code.
 
@@ -37,6 +33,8 @@ Khi tiếp cận project này, AI PHẢI đọc theo thứ tự:
 - **Commit messages**: Viết bằng tiếng Việt.
 
 ### Quy tắc code (C / Kernel)
+
+Áp dụng khi làm việc với code trong `examples/`:
 
 - Tuân thủ [Linux Kernel Coding Style](https://www.kernel.org/doc/html/latest/process/coding-style.html).
 - Indent bằng TAB (không dùng spaces).
@@ -64,18 +62,18 @@ Khi cần debug, AI phải yêu cầu human cung cấp:
 
 ```
 ai_mindset/
-├── CLAUDE.md           # AI entry point (file này)
-├── README.md           # Human entry point
-├── docs/
-│   ├── architecture.md # Kiến trúc tổng quan
-│   ├── api.md          # API specification
-│   ├── data-format.md  # Event formats
-│   ├── use-cases.md    # Use cases
-│   ├── deployment.md   # Deployment guide
-│   └── decisions/      # ADRs
-├── conversations/      # AI chat logs
-├── src/                # Source code
-└── tests/              # Test cases
+├── .gitignore
+├── CLAUDE.md                 # AI entry point (file này)
+├── conversations/            # AI chat logs
+└── examples/                 # Ví dụ minh họa quy trình AI-first
+    ├── beaglebone-black/     # Training AI về hardware BBB
+    │   ├── hw-docs/          # Tài liệu phần cứng AM335x + Device Tree
+    │   └── src/              # Code gen từ AI (GPIO driver)
+    ├── edr_agent/            # Gen code eBPF EDR qua AI
+    │   ├── docs/             # Tài liệu thiết kế (architecture, API, ADRs)
+    │   ├── src/              # Source code (kernel module + user-space agent)
+    │   └── tests/            # Test cases
+    └── windows_os/           # Training AI về Windows Internals
 ```
 
 ## Conversation Logs
